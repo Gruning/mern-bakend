@@ -17,12 +17,16 @@ const DUMMY_PLACES = [{
 router.get('/:pid',(req,res,next)=>{
     const placeId = req.params.pid
     const place = DUMMY_PLACES.find(x => x.id === placeId)
+
+    if(!place) return res.status(404).json({message:`No places with id ${placeId}`})
+
     res.json({place})
 })
 
 router.get('/user/:uid',(req,res,next)=>{
     const userId = req.params.uid
     const place = DUMMY_PLACES.find(x => x.creator === userId)
+    if(!place) return res.status(404).json({message:`No places with user id ${userId}`})
     res.json({place})
 })
 
