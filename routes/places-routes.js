@@ -21,7 +21,7 @@ router.get('/:pid',(req,res,next)=>{
     const place = DUMMY_PLACES.find(x => x.id === placeId)
 
     if(!place){
-        throw new HttpError('Place not found AAA',404)
+        throw new HttpError('Place not found',404)
     } 
 
     res.json({place})
