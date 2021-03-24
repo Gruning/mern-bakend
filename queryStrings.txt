@@ -1,0 +1,2 @@
+http://localhost:5000/api/places/p1
+http://localhost:5000/api/places/user/u1
