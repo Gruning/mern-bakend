@@ -1,2 +1,6 @@
 http://localhost:5000/api/places/p1
 http://localhost:5000/api/places/user/u1
+
+11 Wall St, New York, NY 10005, United States
+PX4Q+QF New York, United States
+lat long 40.70705590639134, -74.01127613157595
