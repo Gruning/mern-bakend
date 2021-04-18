@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid')
 
 const HttpError = require('../Models/http-error')
 
-const DUMMY_PLACES = [{
+let DUMMY_PLACES = [{
     id:'p1',
     title:'Empire State Building',
     description:'One famous building',
@@ -57,10 +57,15 @@ const updatePlace = (req,res,next)=>{
     const placeId = req.params.pid
 
     const updatedPlace = { ...DUMMY_PLACES.find(x=>x.id === placeId)}
-}
+    const placeIndex = DUMMY_PLACES.findIndex(x=>x.id === placeId)
 
-const deletePlace = (req,res,next)=>{
-    
+    updatedPlace.title= title
+    updatedPlace.description= description
+
+    res.status(200).json({place:updatedPlace})
+}
+const deletePlace = (req,res,next)=>{ 
+
 }
 
 exports.getPlaceById= getPlaceById
