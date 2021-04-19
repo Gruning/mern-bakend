@@ -1,11 +1,10 @@
-
 const express = require('express')
 const usersControllers = require('../controllers/users-controllers')
 const HttpError = require('../Models/http-error')
 const router = express.Router()
 
-router.get('/',)
-router.post('/signup',)
-router.post('/login',)
+router.get('/',usersControllers.getUsers)
+router.post('/signup',usersControllers.signup)
+router.post('/login',usersControllers.login)
 
 module.exports = router
