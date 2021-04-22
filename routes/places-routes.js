@@ -1,4 +1,5 @@
 const express = require('express')
+const {check} = require('express-validator')
 const placesControllers = require('../controllers/places-controllers')
 const HttpError = require('../Models/http-error')
 const router = express.Router()
@@ -10,3 +11,4 @@ router.patch('/:pid',placesControllers.updatePlace)
 router.delete('/:pid',placesControllers.deletePlace)
 
 module.exports = router
+
