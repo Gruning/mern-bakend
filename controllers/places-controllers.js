@@ -59,6 +59,10 @@ const createPlace = (req, res, next)=>{
 }
 const updatePlace = (req,res,next)=>{
     const {title, description}= req.body
+    const errors= validationResult(req)
+    if (!errors.isEmpty()) { 
+        throw new HttpError('Invalid inputs',422)
+    }
     const placeId = req.params.pid
 
     const updatedPlace = { ...DUMMY_PLACES.find(x=>x.id === placeId)}
