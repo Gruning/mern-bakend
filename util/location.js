@@ -3,6 +3,7 @@ const HttpError = require('../Models/http-error')
 const API_KEY ='AIzaSyDMdaDwaIBbcOr8SKXJRgf3MolOSEQAZEU'
 
 async function getCoordinatesForAddress(address){
+    //mock place
     return {
        lat:40.9999999,
        lng:-73.9999999
