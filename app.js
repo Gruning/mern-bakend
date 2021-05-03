@@ -34,4 +34,6 @@ mongoose
     .then(()=>{
         console.log('listening to port 5000')
     })
-    .catch()
+    .catch(err=>
+        console.log(err)
+     )
