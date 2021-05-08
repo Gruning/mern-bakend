@@ -53,17 +53,20 @@ const createPlace = async (req, res, next)=>{
         return next(error)
     }
 
-  const createdPlace= new Place({
-    title,
-    description,
-    address,
-    location: coordinates,
-    image:'https://upload.wikimedia.org/wikipedia/commons/1/13/Empire_State_Building_mit_Weihnachtsbeleuchtung.JPG',
-    creator
-  })
-
-  DUMMY_PLACES.push(createdPlace)
-
+    const createdPlace= new Place({
+        title,
+        description,
+        address,
+        location: coordinates,
+        image:'https://upload.wikimedia.org/wikipedia/commons/1/13/Empire_State_Building_mit_Weihnachtsbeleuchtung.JPG',
+        creator
+    })
+    try {
+        await createdPlace.save()
+    } catch (err) {
+        const error = new HttpError('Creating place failed',500)
+        return next(error)
+    }
   res.status(201).json({place: createdPlace})
 
 }
