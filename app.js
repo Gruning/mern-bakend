@@ -28,10 +28,20 @@ app.use((error,req,res,next)=>{
 
 app.listen(5000)
 
-//console.clear() 
+//console.clear()
+
+const connectionStringLocal= 'mongodb://localhost:27017/products_test'
+const connectionStringAtlas = 'mongodb+srv://gruningzen:Esfera3010@cluster0.uo1tr.mongodb.net?retryWrites=true&w=majority' 
+
 mongoose
-    .connect('mongodb+srv://gruningzen:Esfera3010@cluster0.uo1tr.mongodb.net/places?retryWrites=true&w=majority')
-    .then(()=>{
+   // .connect('mongodb+srv://gruningzen:Esfera3010@cluster0.uo1tr.mongodb.net/places?retryWrites=true&w=majority')
+   .connect(
+    connectionStringAtlas, {
+        dbName:'places',
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }) 
+   .then(()=>{
         console.log('listening to port 5000')
     })
     .catch(err=>
