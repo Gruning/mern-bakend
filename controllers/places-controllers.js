@@ -17,12 +17,14 @@ let DUMMY_PLACES = [{
     creator:'u1'
 }]
 
-const getPlaceById =(req,res,next)=>{
+const getPlaceById = async (req,res,next)=>{
     const placeId = req.params.pid
     //const place = DUMMY_PLACES.find(x => x.id === placeId)
     let place
+    console.log(Place)
     try {
-      await place=> Place.findById(placeId)
+      //  const foo = 0
+        place=> await Place.findById(placeId)
     } catch (err) {
       const error = new HttpError('Error finding place',500)
       return next(error)
