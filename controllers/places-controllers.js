@@ -21,7 +21,7 @@ const getPlaceById = async (req,res,next)=>{
     const placeId = req.params.pid
     let place
     try {
-        place= await Place.findById(placeId).exec()
+        place= await Place.findById(placeId)
     } catch (err) {
       const error = new HttpError('Error finding place',500)
       return next(error)
