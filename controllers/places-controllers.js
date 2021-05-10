@@ -87,7 +87,7 @@ const createPlace = async (req, res, next)=>{
   res.status(201).json({place: createdPlace})
 
 }
-const updatePlace = (req,res,next)=>{
+const updatePlace = async (req,res,next)=>{
     const {title, description}= req.body
     const errors= validationResult(req)
     if (!errors.isEmpty()) { 
@@ -95,13 +95,28 @@ const updatePlace = (req,res,next)=>{
     }
     const placeId = req.params.pid
 
-    const updatedPlace = { ...DUMMY_PLACES.find(x=>x.id === placeId)}
-    const placeIndex = DUMMY_PLACES.findIndex(x=>x.id === placeId)
+    //const updatedPlace = { ...DUMMY_PLACES.find(x=>x.id === placeId)}
+    //const placeIndex = DUMMY_PLACES.findIndex(x=>x.id === placeId)
+    
+    let place
+    try {
+      place = await Place.findById(placeId) 
+    } catch (err) {
+        const error = new HttpError('Error finding place for this id',500)
+        return next(error)
+    }
 
-    updatedPlace.title= title
-    updatedPlace.description= description
-
-    res.status(200).json({place:updatedPlace})
+    place.title= title
+    place.description= description
+    
+    try {
+      await place.save()
+    } catch (err) {
+      const error = new HttpError('Error saving the updated place',500)
+      return next(errors)
+    }
+    
+    res.status(200).json({place: place.toObject({getters: true})})
 }
 const deletePlace = (req,res,next)=>{ 
     const placeId = req.params.pid
