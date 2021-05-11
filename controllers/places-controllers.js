@@ -118,12 +118,12 @@ const updatePlace = async (req,res,next)=>{
     
     res.status(200).json({place: place.toObject({getters: true})})
 }
-const deletePlace = (req,res,next)=>{ 
+const deletePlace = async (req,res,next)=>{ 
     const placeId = req.params.pid
     let place
     try {
       place = await Place.findById(placeId) 
-      
+      console.log(place) 
     } catch (err) {
       const error = new HttpError('Error finding place',500)
       return next(error)
