@@ -113,20 +113,28 @@ const updatePlace = async (req,res,next)=>{
       await place.save()
     } catch (err) {
       const error = new HttpError('Error saving the updated place',500)
-      return next(errors)
+      return next(error)
     }
     
     res.status(200).json({place: place.toObject({getters: true})})
 }
 const deletePlace = (req,res,next)=>{ 
     const placeId = req.params.pid
-
-    if(!DUMMY_PLACES.find(x => x.id === placeId)){
-        throw new HttpError('No places found for this id')
+    let place
+    try {
+      place = await Place.findById(placeId) 
+      
+    } catch (err) {
+      const error = new HttpError('Error finding place',500)
+      return next(error)
     }
 
-    DUMMY_PLACES = DUMMY_PLACES.filter(x=>x.id!== placeId)
-
+    try {
+      await place.remove()
+    } catch (err) {
+      const error = new HttpError('Error deleting place',500)
+      return next(error)
+    }
     res.status(200).json({message:'deleted'})
 }
 
