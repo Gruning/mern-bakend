@@ -55,12 +55,22 @@ const signup= async (req,res,next)=>{
     res.status(201).json({user: createdUser.toObject({getters:true})})
 }
 
-const login= (req,res,next)=>{
+const login= async (req,res,next)=>{
     const {email,password} =req.body
-    const identifietUser =DUMMY_USERS.find(x=>x.email===email)
+    
+	  let existingUser
+    
+    try{
+        existingUser= await User.findOne({email:email})
+    } catch(err){
+        const error= new HttpError('Error searching for registered users',500)
+        return next(error)
+    }
 
-    if(!identifietUser || identifietUser.password!== password) 
-        throw new HttpError('Wrong credentials ',401)
+	 if(!existingUser || existingUser.password != password){
+			  const error= new HttpError('Invalid credentials',401)
+		 	  return next(error)
+	 }
 
    res.json({message:'Logged in!'}) 
 }
