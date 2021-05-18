@@ -4,6 +4,7 @@ const { validationResult } = require('express-validator')
 const HttpError = require('../Models/http-error')
 const getCoordsForAddress = require('../util/location')
 const Place= require('../Models/place')
+const User= require('../Models/user')
 
 let DUMMY_PLACES = [{
     id:'p1',
@@ -78,8 +79,29 @@ const createPlace = async (req, res, next)=>{
         image:'https://upload.wikimedia.org/wikipedia/commons/1/13/Empire_State_Building_mit_Weihnachtsbeleuchtung.JPG',
         creator
     })
+    
+    let user
+    try{
+        user= await User.findById(creator)
+    }catch(err){
+        const error= new HttpError('Error searching related user',500)
+        return next(error) 
+    }
+
+    if(!user){
+        const error= new HttpError('Related user not found', 500)
+        return next(error)
+    }
+
     try {
-        await createdPlace.save()
+        const sess= await mongoose.startSession()
+        sess.startTransaction()
+        
+        await createdPlace.save({session:sess})
+        user.places.push(createdPlace)
+        await user.save({session:sess})
+
+        await sess.commitTransaction()
     } catch (err) {
         const error = new HttpError('Creating place failed',500)
         return next(error)
