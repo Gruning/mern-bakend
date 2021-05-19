@@ -28,8 +28,6 @@ app.use((error,req,res,next)=>{
 
 app.listen(5000)
 
-//console.clear()
-
 const connectionStringLocal= 'mongodb://localhost:27017/products_test'
 const connectionStringAtlas = 'mongodb+srv://gruningzen:Esfera3010@cluster0.uo1tr.mongodb.net?retryWrites=true&w=majority' 
 

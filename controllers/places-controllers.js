@@ -29,6 +29,7 @@ const getPlaceById = async (req,res,next)=>{
 const getPlacesByUserId = async(req,res,next)=>{
     const userId = req.params.uid
 
+    //let places
     let userWhithPlaces
     try {
         userWhithPlaces = await User.findById(userId).populate('places')
@@ -39,6 +40,7 @@ const getPlacesByUserId = async(req,res,next)=>{
       return next(error)
     } 
     
+    //if(!places || places.length === 0){
     if(!userWhithPlaces.places || userWhithPlaces.places.length === 0){
         return next(new HttpError('No places found for provided user',404)) 
     }
