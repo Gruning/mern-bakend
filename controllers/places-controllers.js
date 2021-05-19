@@ -28,20 +28,21 @@ const getPlaceById = async (req,res,next)=>{
 
 const getPlacesByUserId = async(req,res,next)=>{
     const userId = req.params.uid
-    //const places = DUMMY_PLACES.filter(x => x.creator === userId)
-    
-    let places 
+
+    let userWhithPlaces
     try {
-      places= await Place.find({creator: userId})
-    } catch (err) {
+        userWhithPlaces = await User.findById(userId).populate('places')
+        console.log(userWhithPlaces)
+        console.log(userWhithPlaces.places)
+      } catch (err) {
       const error= new HttpError('Fetching places failed',500)
       return next(error)
     } 
     
-    if(!places || places.length === 0){
+    if(!userWhithPlaces.places || userWhithPlaces.places.length === 0){
         return next(new HttpError('No places found for provided user',404)) 
     }
-    res.json({places: places.map(place=> place.toObject({getters: true})) })
+    res.json({places: userWhithPlaces.places})//.map(place=> place.toObject({getters: true})) })
 }
 
 const createPlace = async (req, res, next)=>{
