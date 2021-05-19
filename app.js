@@ -35,7 +35,7 @@ mongoose
    // .connect('mongodb+srv://gruningzen:Esfera3010@cluster0.uo1tr.mongodb.net/places?retryWrites=true&w=majority')
    .connect(
     connectionStringAtlas, {
-        dbName:'places',
+        dbName:'mern',
         useNewUrlParser: true,
         useUnifiedTopology: true
     }) 
