@@ -11,9 +11,10 @@ const app = express()
 app.use(bodyParser.json())
 
 app.use((req, res, next)=>{
-    res.setHeader('AccessControlAllowOrigin','*')
-    res.setHeader('AccessControlAllowHeaders','Origin, X-Requested-Width, Content-Type, Accept, Authorization')
-    res.setHeader('AccessControlAllowMethods','GET, POST, PATCH, DELETE')
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Headers','Origin, X-Requested-Width, Content-Type, Accept, Authorization')
+    res.setHeader('Access-Control-Allow-Methods','GET, POST, PATCH, DELETE')
+    next()
 })
 
 app.use('/api/places',placesRoutes)
