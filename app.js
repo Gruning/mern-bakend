@@ -44,7 +44,8 @@ mongoose
     connectionStringAtlas, {
         dbName:'mern',
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true
     }) 
    .then(()=>{
         console.log('listening to port 5000')
