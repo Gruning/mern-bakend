@@ -68,7 +68,7 @@ const createPlace = async (req, res, next)=>{
         description,
         address,
         location: coordinates,
-        image:'https://upload.wikimedia.org/wikipedia/commons/1/13/Empire_State_Building_mit_Weihnachtsbeleuchtung.JPG',
+        image:req.file.path,//'https://upload.wikimedia.org/wikipedia/commons/1/13/Empire_State_Building_mit_Weihnachtsbeleuchtung.JPG',
         creator
     })
     
