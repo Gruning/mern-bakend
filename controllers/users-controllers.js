@@ -1,6 +1,7 @@
 const HttpError = require('../Models/http-error')
 const User = require('../Models/user')
 const {validationResult}= require('express-validator')
+const bcrypt = require('bcryptjs')
 
 const getUsers= async (req,res,next)=>{
     let users
@@ -37,13 +38,21 @@ const signup= async (req,res,next)=>{
         const error = new HttpError('User exists, please login',422)
         return next(error)
     }
-    
+
+    let hashedPassword
+    try {
+        hashedPassword= await bcrypt.hash(password,12)
+    } catch (err) {
+       const error = new HttpError('Could not create user with given password',500)
+       return next(error)
+    }
+
 
     const createdUser = new User({
         name, 
         email, 
         image:req.file.path,//'https://live.staticflickr.com/7631/26849088292_36fc52ee90_b.jpg', 
-        password,
+        password: hashedPassword,
         places:[]
     })
 
