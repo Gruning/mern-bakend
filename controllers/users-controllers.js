@@ -62,7 +62,24 @@ const signup= async (req,res,next)=>{
         const error = new HttpError('Registering user failed',500)
         return next(error)
     }
-    res.status(201).json({user: createdUser.toObject({getters:true})})
+    let token
+    try {
+    token = jwt.sign(
+        {userId:createdUser.id, email:createdUser.email},
+        'supersecret_dont_share',
+        {expiresIn:'1h'}        
+        )
+        
+    } catch (err) {
+       const error = new HttpError('Token error, try again later',500)
+       return next(error)
+        
+    }
+
+
+    res
+        .status(201)
+        .json({userId:createdUser.id, email:createdUser.email, token:token})
 }
 
 const login= async (req,res,next)=>{
