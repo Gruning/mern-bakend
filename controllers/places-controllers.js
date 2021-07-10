@@ -55,7 +55,7 @@ const createPlace = async (req, res, next)=>{
         console.log(errors)
         return next (new HttpError('Invalid inputs',422))
     }
-    const {title, description, address, creator}= req.body
+    const {title, description, address }= req.body
 
     let coordinates
 
@@ -71,12 +71,12 @@ const createPlace = async (req, res, next)=>{
         address,
         location: coordinates,
         image:req.file.path,//'https://upload.wikimedia.org/wikipedia/commons/1/13/Empire_State_Building_mit_Weihnachtsbeleuchtung.JPG',
-        creator
+        creator: req.userData.userId
     })
     
     let user
     try{
-        user= await User.findById(creator)
+        user= await User.findById(req.userData.userId)
     }catch(err){
         const error= new HttpError('Error searching related user',500)
         return next(error) 
