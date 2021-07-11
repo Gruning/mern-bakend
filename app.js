@@ -46,13 +46,13 @@ app.use((error,req,res,next)=>{
 app.listen(5000)
 
 const connectionStringLocal= 'mongodb://localhost:27017/products_test'
-const connectionStringAtlas = 'mongodb+srv://gruningzen:Esfera3010@cluster0.uo1tr.mongodb.net?retryWrites=true&w=majority' 
+const connectionStringAtlas = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWD}@cluster0.uo1tr.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority` 
 
 mongoose
    // .connect('mongodb+srv://gruningzen:Esfera3010@cluster0.uo1tr.mongodb.net/places?retryWrites=true&w=majority')
    .connect(
     connectionStringAtlas, {
-        dbName:'mern',
+        //dbName:'mern',
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true
