@@ -1,0 +1,7 @@
+{
+    "env":{
+        "DB_USER": "gruningzen",
+        "DB_PASSWD":"Esfera3010",
+        "DB_NAME": "mern"
+    }
+}
