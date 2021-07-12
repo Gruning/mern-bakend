@@ -43,7 +43,7 @@ app.use((error,req,res,next)=>{
     .json({message:error.message||'Unknown error'})
 })
 
-app.listen(5000)
+app.listen(process.env.PORT || 5000)
 
 const connectionStringLocal= 'mongodb://localhost:27017/products_test'
 const connectionStringAtlas = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWD}@cluster0.uo1tr.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority` 
