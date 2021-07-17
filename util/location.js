@@ -14,7 +14,7 @@ async function getCoordinatesForAddress(address){
 
     const data = response.data
     if(!data || data.status ==='ZERO_RESULTS'){
-        const error= new HttpError('No location for that location',422)
+        const error= new HttpError('No location for that address',422)
         throw error
     }
 
