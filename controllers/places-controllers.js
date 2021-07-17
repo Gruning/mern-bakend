@@ -44,7 +44,7 @@ const getPlacesByUserId = async(req,res,next)=>{
     
     //if(!places || places.length === 0){
     if(!userWhithPlaces.places || userWhithPlaces.places.length === 0){
-        return next(new HttpError('No places found for provided user',404)) 
+        return next(new HttpError('No places found for this user',404)) 
     }
     res.json({places: userWhithPlaces.places.map(place=> place.toObject({getters: true})) })
 }

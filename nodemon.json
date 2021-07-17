@@ -3,7 +3,8 @@
         "DB_USER": "gruningzen",
         "DB_PASSWD":"Esfera3010",
         "DB_NAME": "mern",
-        "GOOGLE_API_KEY":"...",
+        "GOOGLE_API_KEY":"AIzaSyA7QRhRorLgLFvQM1iUJEq7RWNgN8dV0Ak",
         "JWT_KEY":"supersecret_dont_share"
     }
+    
 }
