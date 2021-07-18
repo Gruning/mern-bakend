@@ -5,10 +5,10 @@ const API_KEY = process.env.GOOGLE_API_KEY
 
 async function getCoordinatesForAddress(address){
     //mock place
-    return {
-       lat:-32.94622183763397,
-       lng:-60.633590093361
-    }
+    //return {
+    //   lat:-32.94622183763397,
+    //   lng:-60.633590093361
+    //}
 
     const response= await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`)
 
