@@ -13,6 +13,10 @@ async function getCoordinatesForAddress(address){
     const response= await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`)
 
     const data = response.data
+    if(data.status && data.status !=='OK'){
+        const error= new HttpError(data.status,422)
+        throw error
+    }
     if(!data || data.status ==='ZERO_RESULTS'){
         const error= new HttpError('No location for that address',422)
         throw error
