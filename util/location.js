@@ -10,11 +10,11 @@ async function getCoordinatesForAddress(address){
     //   lng:-73.9999999
     //}
 
-    const response= await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}`)//&key=${API_KEY}`)
+    const response= await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`)
 
     const data = response.data
     if(data.status && data.status !=='OK'){
-        const error= new HttpError(`${data.status} - ${data.status.error_message}`,422)
+        const error= new HttpError(`${data.status} - ${data.status.error_message} - ${encodeURIComponent(address)}`,422)
         throw error
     }
     if(!data || data.status ==='ZERO_RESULTS'){
