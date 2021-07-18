@@ -14,7 +14,7 @@ async function getCoordinatesForAddress(address){
 
     const data = response.data
     if(data.status && data.status !=='OK'){
-        const error= new HttpError(`${data.status} - ${data.status.error_message} - ${encodeURIComponent(address)}`,422)
+        const error= new HttpError(`${data.status} - ${data.status.error_message} - ${encodeURIComponent(address)} - k=${API_KEY}`,422)
         throw error
     }
     if(!data || data.status ==='ZERO_RESULTS'){
