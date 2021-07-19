@@ -4,7 +4,7 @@ const API_KEY = process.env.GOOGLE_API_KEY
 //const API_KEY ='AIzaSyDMdaDwaIBbcOr8SKXJRgf3MolOSEQAZEU'
 
 async function getCoordinatesForAddress(address){
-    mock place
+    //mock place
     return {
        lat:-32.94622183763397,
        lng:-60.633590093361
